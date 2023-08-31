@@ -57,9 +57,7 @@ const Pizza = (props) => {
         src={img}
         alt="spinaci"
         width="100"
-        className={`${
-          soldOut ? "filter bg-red-500 grayscale opacity-80" : "bg-yellow-400"
-        }`}
+        className={`${soldOut && "grayscale opacity-80"}`}
       />
       <div className="flex flex-col gap-1">
         <h1 className="text-xl">{name}</h1>
@@ -71,14 +69,15 @@ const Pizza = (props) => {
 };
 
 const Menu = () => {
-  const pizzas = pizzaData.map((pizza, i) => {
+  const pizzas = pizzaData.map((pizza) => {
     return (
       <Pizza
         img={pizza.photoName}
         name={pizza.name}
         ingredients={pizza.ingredients}
         price={pizza.soldOut ? "SOLD OUT" : pizza.price}
-        key={i}
+        key={pizza.name}
+        soldOut={pizza.soldOut}
         // Adding a unique key for React list rendering
       />
     );
